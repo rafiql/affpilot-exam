@@ -3,11 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from . import models
 from .database import engine
-from .routers import post, user, auth
+from .routers import books, authors
 from .config import settings
 
 
-# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -21,9 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(post.router)
-app.include_router(user.router)
-app.include_router(auth.router)
+app.include_router(books.router)
+app.include_router(authors.router)
 
 
 
