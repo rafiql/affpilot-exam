@@ -5,14 +5,14 @@ from typing import Optional
 
 class AuthorOut(BaseModel):
     id: int
-    name: Str
+    name: str
     
     class Config:
         orm_mode = True
 
 
 class AuthorCreate(BaseModel):
-    name: Str
+    name: str
 
 
 class BookBase(BaseModel):

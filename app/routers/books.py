@@ -5,7 +5,7 @@ from typing import List, Optional
 from sqlalchemy import func
 from .. import models, schemas
 from ..database import get_db
-
+from . import logs
 
 router = APIRouter(
     prefix="/books",
