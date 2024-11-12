@@ -7,6 +7,7 @@ from .. import models, schemas
 from ..database import get_db
 from . import logs
 
+
 router = APIRouter(
     prefix="/books",
     tags=['Books']
@@ -20,7 +21,7 @@ def get_books(db: Session = Depends(get_db), limit: int = 10, skip: int = 0, sea
     return books
 
 
-@router.post("/", response_model=schemas.Book)
+@router.post("/", response_model=schemas.BookOut)
 def create_books(book: schemas.BookCreate, db: Session = Depends(get_db)):
 
     new_book = models.Book(**book.dict())
@@ -29,6 +30,7 @@ def create_books(book: schemas.BookCreate, db: Session = Depends(get_db)):
     db.refresh(new_book)
 
     return new_book
+
 
 #query parameter as ID
 @router.get("/{id}", response_model=schemas.BookOut)
@@ -45,19 +47,19 @@ def get_book(id: int, db: Session = Depends(get_db)):
 @router.delete("/{id}")
 def delete_book(id: int, db: Session = Depends(get_db)):
 
-    book_query = db.query(models.Book).filter(models.Book.id == id)
-    book = book_query.first()
+    book_to_delete = db.query(models.Book).filter(models.Book.id == id)
+    book = book_to_delete.first()
 
     if book == None:
         return f"book with id: {id} was not found"
 
-    book_query.delete(synchronize_session=False)
+    book_to_delete.delete(synchronize_session=False)
     db.commit()
 
     return Response("Book is deleted")
 
 
-@router.put("/{id}", response_model=schemas.Book)
+@router.put("/{id}", response_model=schemas.BookOut)
 def update_book(id: int, updated_book: schemas.BookCreate, db: Session = Depends(get_db)):
 
     book_query = db.query(models.Book).filter(models.Book.id == id)

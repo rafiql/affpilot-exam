@@ -7,7 +7,7 @@ from .database import Base
 
 
 class Book(Base):
-    __tablename__ = "posts"
+    __tablename__ = "books"
 
     id = Column(Integer, primary_key=True, nullable=False)
     title = Column(String, nullable=False)

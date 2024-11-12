@@ -6,9 +6,15 @@ from .database import engine
 from .routers import books, authors
 from .config import settings
 
+#for migratiion into db table
+from app.database import Base, engine  
+from app.models import Author, Book
 
 
 app = FastAPI()
+
+#for migratiion into db table
+Base.metadata.create_all(bind=engine)
 
 origins = ["*"]
 

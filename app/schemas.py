@@ -1,12 +1,11 @@
-from pydantic import BaseModel, EmailStr
-from datetime import datetime
+from pydantic import BaseModel
 from typing import Optional
 
-
+# Author schemas
 class AuthorOut(BaseModel):
     id: int
     name: str
-    
+
     class Config:
         orm_mode = True
 
@@ -14,29 +13,19 @@ class AuthorOut(BaseModel):
 class AuthorCreate(BaseModel):
     name: str
 
-
+# Book schemas
 class BookBase(BaseModel):
     title: str
-    
+    author_id: int
+
 
 class BookCreate(BookBase):
     pass
 
 
-class Book(BookBase):
+class BookOut(BookBase):
     id: int
-    author_id: int
-    author: AuthorOut
+    author: AuthorOut  # Display author details in response
 
     class Config:
         orm_mode = True
-
-
-class BookOut(BaseModel):
-    Book: Book
-
-    class Config:
-        orm_mode = True
-
-
-
