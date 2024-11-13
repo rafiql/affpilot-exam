@@ -29,3 +29,11 @@ class BookOut(BookBase):
 
     class Config:
         orm_mode = True
+
+
+class BookByAuthorOut(BookBase):
+    author_name: str
+    title: str
+
+    class Config:
+        orm_mode = True

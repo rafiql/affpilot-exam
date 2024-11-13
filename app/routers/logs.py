@@ -16,8 +16,10 @@ def log_new_book(mapper, connection, target):
     logging.info(log_message)
 
 
-# Log deletion event
 @event.listens_for(Book, "after_delete")
 def log_delete_book(mapper, connection, target):
+    print("Delete event triggered")  # For debugging
     log_message = f"Action: DELETE - Title: {target.title}, Author ID: {target.author_id}"
     logging.info(log_message)
+
+

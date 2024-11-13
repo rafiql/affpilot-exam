@@ -31,9 +31,8 @@ def create_books(book: schemas.BookCreate, db: Session = Depends(get_db)):
 
     return new_book
 
-
 #query parameter as ID
-@router.get("/{id}", response_model=schemas.BookOut)
+@router.get("/book/{id}", response_model=schemas.BookOut)
 def get_book(id: int, db: Session = Depends(get_db)):
     
     book = db.query(models.Book).filter(models.Book.id == id).first()
@@ -42,6 +41,21 @@ def get_book(id: int, db: Session = Depends(get_db)):
         return f"book with id: {id} was not found"
 
     return book
+
+
+@router.get("/book/by/{author_name}", response_model=List[schemas.BookByAuthorOut])
+def get_books_by_author(author_name: str, db: Session = Depends(get_db)):
+    # Fetch the author by name
+    author = db.query(models.Author).filter(models.Author.name == author_name).first()
+
+    if not author:
+        return f"author with name: {author_name} was not found"
+
+    # Fetch books written by the author
+    books = db.query(models.Book).filter(models.Book.author_id == author.id).all()
+
+    return [{"author_name": author.name, "title": book.title, "author_id": author.id} for book in books]
+
 
 
 @router.delete("/{id}")
@@ -53,7 +67,7 @@ def delete_book(id: int, db: Session = Depends(get_db)):
     if book == None:
         return f"book with id: {id} was not found"
 
-    book_to_delete.delete(synchronize_session=False)
+    db.delete(book)
     db.commit()
 
     return Response("Book is deleted")

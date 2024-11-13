@@ -1,3 +1,7 @@
 2024-11-12 09:08:19,648 - Action: CREATE - Title: Al Quran, Author ID: 1
 2024-11-12 09:33:18,092 - Action: CREATE - Title: Sahih Muslim, Author ID: 1
 2024-11-12 09:34:33,426 - Action: CREATE - Title: Sahih Bukhari, Author ID: 2
+2024-11-12 09:55:21,096 - Action: CREATE - Title: Sahih Bukhari, Author ID: 2
+2024-11-12 10:03:08,101 - Action: CREATE - Title: Sahih Bukhari, Author ID: 2
+2024-11-12 10:03:18,918 - Action: DELETE - Title: Sahih Bukhari, Author ID: 2
+2024-11-13 11:13:44,259 - Action: CREATE - Title: Hadith, Author ID: 3
