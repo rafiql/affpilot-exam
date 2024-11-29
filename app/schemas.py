@@ -7,7 +7,8 @@ class AuthorOut(BaseModel):
     name: str
 
     class Config:
-        orm_mode = True
+        from_attributes=True
+        #orm_mode = True
 
 
 class AuthorCreate(BaseModel):
@@ -28,7 +29,8 @@ class BookOut(BookBase):
     author: AuthorOut  # Display author details in response
 
     class Config:
-        orm_mode = True
+        from_attributes=True
+        #orm_mode = True
 
 
 class BookByAuthorOut(BookBase):
@@ -36,4 +38,5 @@ class BookByAuthorOut(BookBase):
     title: str
 
     class Config:
-        orm_mode = True
+        from_attributes=True
+        #orm_mode = True

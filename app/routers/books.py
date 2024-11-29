@@ -7,6 +7,11 @@ from .. import models, schemas
 from ..database import get_db
 from . import logs
 
+import redis
+import json
+from fastapi.encoders import jsonable_encoder 
+
+
 
 router = APIRouter(
     prefix="/books",
@@ -14,11 +19,26 @@ router = APIRouter(
 )
 
 
+redis_client = redis.Redis(host="localhost", port=6379, decode_responses=True)
+
+
 @router.get("/", response_model=List[schemas.BookOut])
 def get_books(db: Session = Depends(get_db), limit: int = 10, skip: int = 0, search: Optional[str] = ""):
+
+    # Check if the data exists in Redis
+    cache_key = f"books:{limit}:{skip}:{search}"
+    cached_books = redis_client.get(cache_key)
+    if cached_books:
+        return json.loads(cached_books)
+
     books = db.query(models.Book).filter(models.Book.title.contains(search)).limit(limit).offset(skip).all()
 
-    return books
+    # Convert SQLAlchemy objects to Pydantic models
+    books_out = [schemas.BookOut.from_orm(book) for book in books]
+    # Cache the data for 1 hour
+    redis_client.setex(cache_key, 3600, json.dumps(jsonable_encoder(books_out)))
+
+    return books_out
 
 
 @router.post("/", response_model=schemas.BookOut)
