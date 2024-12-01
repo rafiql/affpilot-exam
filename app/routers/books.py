@@ -4,13 +4,12 @@ from typing import List, Optional
 
 from sqlalchemy import func
 from .. import models, schemas
-from ..database import get_db
+from .. database import get_db
 from . import logs
 
 import redis
 import json
 from fastapi.encoders import jsonable_encoder 
-
 
 
 router = APIRouter(
@@ -48,6 +47,11 @@ def create_books(book: schemas.BookCreate, db: Session = Depends(get_db)):
     db.add(new_book)
     db.commit()
     db.refresh(new_book)
+
+    # Invalidate cache
+    keys = redis_client.keys("books:*")
+    for key in keys:
+        redis_client.delete(key)
 
     return new_book
 
@@ -90,7 +94,12 @@ def delete_book(id: int, db: Session = Depends(get_db)):
     db.delete(book)
     db.commit()
 
-    return Response("Book is deleted")
+    # Invalidate cache
+    keys = redis_client.keys("books:*")
+    for key in keys:
+        redis_client.delete(key)
+
+    return {"detail": "Book is deleted"}
 
 
 @router.put("/{id}", response_model=schemas.BookOut)
@@ -105,5 +114,10 @@ def update_book(id: int, updated_book: schemas.BookCreate, db: Session = Depends
     book_query.update(updated_book.dict(), synchronize_session=False)
 
     db.commit()
+
+    # Invalidate cache
+    keys = redis_client.keys("books:*")
+    for key in keys:
+        redis_client.delete(key)
 
     return book_query.first()

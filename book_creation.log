@@ -5,3 +5,22 @@
 2024-11-12 10:03:08,101 - Action: CREATE - Title: Sahih Bukhari, Author ID: 2
 2024-11-12 10:03:18,918 - Action: DELETE - Title: Sahih Bukhari, Author ID: 2
 2024-11-13 11:13:44,259 - Action: CREATE - Title: Hadith, Author ID: 3
+2024-11-29 19:09:27,358 - Action: CREATE - Title: How to Code Python, Author ID: 1
+2024-11-29 19:11:17,658 - Action: CREATE - Title: Java and Python, Author ID: 1
+2024-11-29 19:25:09,516 - Action: DELETE - Title: Java and Python, Author ID: 1
+2024-11-29 19:32:43,433 - Action: DELETE - Title: How to Code Python, Author ID: 1
+2024-11-29 19:37:38,424 - Action: CREATE - Title: Python, Author ID: 1
+2024-11-29 19:55:27,717 - Action: DELETE - Title: Python, Author ID: 1
+2024-11-29 20:11:23,172 - Action: CREATE - Title: Python, Author ID: 1
+2024-11-29 20:13:31,551 - Action: DELETE - Title: Python, Author ID: 1
+2024-11-29 20:26:37,057 - Action: CREATE - Title: Python, Author ID: 1
+2024-12-01 09:52:37,213 - Action: CREATE - Title: DevOps, Author ID: 1
+2024-12-01 10:00:35,914 - Action: CREATE - Title: SSIS, Author ID: 1
+2024-12-01 10:04:30,765 - Action: DELETE - Title: SSIS, Author ID: 1
+2024-12-01 10:13:41,276 - Action: DELETE - Title: DevOps, Author ID: 1
+2024-12-01 10:52:15,363 - Action: CREATE - Title: Node JS, Author ID: 1
+2024-12-01 11:03:50,608 - Action: CREATE - Title: Node JS 5, Author ID: 1
+2024-12-01 11:15:02,637 - Action: CREATE - Title: PHP, Author ID: 1
+2024-12-01 11:20:36,552 - Action: CREATE - Title: Java and Java, Author ID: 1
+2024-12-01 11:56:13,099 - Action: DELETE - Title: Java and Java, Author ID: 1
+2024-12-01 11:57:12,808 - Action: CREATE - Title: Bukhari, Author ID: 1
