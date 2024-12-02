@@ -9,19 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign reviewers for 'frontend' label
-        if: contains(github.event.label.name, 'frontend')
+        if: contains(github.event.label.name, backend)
         uses: peter-evans/create-pull-request@v4
         with:
           reviewers: 'anshaareena'
 
-      - name: Assign reviewers for 'backend' label
-        if: contains(github.event.label.name, 'backend')
-        uses: peter-evans/create-pull-request@v4
-        with:
-          reviewers: 'anshaareena'
 
-      - name: Assign reviewers for 'docs' label
-        if: contains(github.event.label.name, 'docs')
-        uses: peter-evans/create-pull-request@v4
-        with:
-          reviewers: 'anshaareena'
+
+     
