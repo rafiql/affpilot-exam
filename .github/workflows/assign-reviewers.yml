@@ -1,0 +1,27 @@
+name: Auto-assign Reviewers
+
+on:
+  pull_request:
+    types: [labeled] # Trigger when a label is added
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign reviewers for 'frontend' label
+        if: contains(github.event.label.name, 'frontend')
+        uses: peter-evans/create-pull-request@v4
+        with:
+          reviewers: 'frontend-reviewer1,frontend-reviewer2'
+
+      - name: Assign reviewers for 'backend' label
+        if: contains(github.event.label.name, 'backend')
+        uses: peter-evans/create-pull-request@v4
+        with:
+          reviewers: 'backend-reviewer1,backend-reviewer2'
+
+      - name: Assign reviewers for 'docs' label
+        if: contains(github.event.label.name, 'docs')
+        uses: peter-evans/create-pull-request@v4
+        with:
+          reviewers: 'docs-reviewer'
