@@ -12,16 +12,16 @@ jobs:
         if: contains(github.event.label.name, 'frontend')
         uses: peter-evans/create-pull-request@v4
         with:
-          reviewers: 'frontend-reviewer1,frontend-reviewer2'
+          reviewers: 'anshaareena'
 
       - name: Assign reviewers for 'backend' label
         if: contains(github.event.label.name, 'backend')
         uses: peter-evans/create-pull-request@v4
         with:
-          reviewers: 'backend-reviewer1,backend-reviewer2'
+          reviewers: 'anshaareena'
 
       - name: Assign reviewers for 'docs' label
         if: contains(github.event.label.name, 'docs')
         uses: peter-evans/create-pull-request@v4
         with:
-          reviewers: 'docs-reviewer'
+          reviewers: 'anshaareena'
